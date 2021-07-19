@@ -2,9 +2,11 @@ describe Game do
   let(:game) { Game.first }
 
   before do
-    Game.create(title: "Mario Kart", platform: "Switch", genre: "Racing", price: 60)
-    Review.create(score: 8, comment: "A classic", game_id: game.id)
-    Review.create(score: 10, comment: "Wow what a game", game_id: game.id)
+    game = Game.create(title: "Mario Kart", platform: "Switch", genre: "Racing", price: 60)
+    user1 = User.create(name: "Liza")
+    user2 = User.create(name: "Duane")
+    Review.create(score: 8, comment: "A classic", game_id: game.id, user_id: user1.id)
+    Review.create(score: 10, comment: "Wow what a game", game_id: game.id, user_id: user2.id)
   end
   
   it "has the correct columns in the games table" do
@@ -13,6 +15,10 @@ describe Game do
 
   it "knows about its associated reviews" do
     expect(game.reviews.count).to eq(2)
+  end
+
+  it "knows about its associated users" do
+    expect(game.users.count).to eq(2)
   end
 
   it "can create an associated review with the #create method" do
