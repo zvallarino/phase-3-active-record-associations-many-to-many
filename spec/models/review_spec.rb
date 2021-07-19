@@ -3,17 +3,24 @@ describe Review do
 
   before do
     game = Game.create(title: "Mario Kart", platform: "Switch", genre: "Racing", price: 60)
-    Review.create(score: 8, comment: "A classic", game_id: game.id)
+    user = User.create(name: "Liza")
+    Review.create(score: 8, comment: "A classic", game_id: game.id, user_id: user.id)
   end
   
   it "has the correct columns in the reviews table" do
-    expect(review).to have_attributes(score: 8, comment: "A classic", game_id: Game.first.id)
+    expect(review).to have_attributes(score: 8, comment: "A classic", game_id: Game.first.id, user_id: User.first.id)
   end
 
   it "knows about its associated game" do
     game = Game.find(review.game_id)
 
     expect(review.game).to eq(game)
+  end
+
+  it "knows about its associated user" do
+    user = User.find(review.user_id)
+
+    expect(review.user).to eq(user)
   end
 
   it "can create an associated game using the game instance" do

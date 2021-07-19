@@ -32,7 +32,7 @@ time we'll add a third model into the mix: a users model. We'll be setting up th
 
 Once we're done setting up the database tables, here's what the ERD will look like:
 
-![Game Reviews ERD]()
+![Game Reviews ERD](https://curriculum-content.s3.amazonaws.com/phase-3/active-record-associations-many-to-many/games-reviews-users-erd.png)
 
 To get started, run `bundle install`, then follow along with the code.
 
@@ -137,9 +137,9 @@ about the associate game; but now, we can also access data about the associated 
 
 ```rb
 review.game
-# =>
+# => #<Game:0x00007ff71a25f5d0 id: 1, title: "Diablo", genre: "Visual novel", ...>
 review.user
-# =>
+# => #<User:0x00007ff71a26fe58 id: 1, name: "Liza", ...>
 ```
 
 In Active Record parlance, we refer to this `Review` class as a "join" class,
@@ -165,7 +165,7 @@ all the associated reviews:
 ```rb
 game = Game.first
 game.reviews
-# =>
+# => [#<Review:0x00007ff71926dac8 id: 1, ...>, #<Review:0x00007ff71926d960 id: 2, ...>
 ```
 
 However, if you'll recall, we updated our tables to support another
@@ -180,7 +180,7 @@ to see all the users associated with a specific game:
 
 ```rb
 game.users
-# =>
+# => [#<User>, #<User>]
 ```
 
 Writing the SQL out to access this relationship would be a bit of a pain; we'd
@@ -213,7 +213,7 @@ class):
 ```rb
 game = Game.first
 game.users
-# =>
+# => [#<User:0x00007f96813a5d58 id: 1, name: "Liza", ...>]
 ```
 
 We can now use Active Record to go **through** the join model, `Review`, from
@@ -222,7 +222,7 @@ ourselves. Pretty cool!
 
 There are a couple important things to note when using the `has_many` macro with
 the `through:` option. Order matters — you must place the first `has_many` that
-references the join table above the second `has_many` that goes through that
+references the join table **above** the second `has_many` that goes through that
 join table. This code won't work:
 
 ```rb
@@ -274,9 +274,9 @@ the games they have reviewed:
 ```rb
 user = User.first
 user.reviews
-# =>
+# => [#<Review:0x00007fc2a2ac01b8 id: 147, score: 8, ...>]
 user.games
-# =>
+# => [#<Game:0x00007fc2a2b53710 id: 1, title: "Diablo", genre: "Visual novel", ...>]
 ```
 
 Success! All of our models are now associated correctly, and have methods
@@ -284,7 +284,7 @@ available that make it convenient for us to access data across multiple database
 tables using the primary key/foreign key relationship. Our Ruby code now reflects
 the associations we established:
 
-![Game Reviews ERD]()
+![Game Reviews ERD](https://curriculum-content.s3.amazonaws.com/phase-3/active-record-associations-many-to-many/games-reviews-users-erd.png)
 
 ## Conclusion
 
