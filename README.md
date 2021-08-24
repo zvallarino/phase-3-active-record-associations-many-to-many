@@ -45,8 +45,8 @@ lesson.
 To start, let's add the code we'll need for the `User` model as well. We'll start
 by generating the migration:
 
-```sh
-bundle exec rake db:create_migration NAME=create_users
+```console
+$ bundle exec rake db:create_migration NAME=create_users
 ```
 
 Let's create the `users` table with a `name` column:
@@ -68,8 +68,8 @@ time we create a **belongs to** relationship, we need a foreign key to establish
 this relationship. Let's go ahead and write a migration to update the `reviews`
 table:
 
-```sh
-bundle exec rake db:create_migration NAME=add_user_id_to_reviews
+```console
+$ bundle exec rake db:create_migration NAME=add_user_id_to_reviews
 ```
 
 We'll use the `add_column` method to update the `reviews` table and add a
@@ -86,14 +86,14 @@ end
 With that, our migrations are good to go! Run the new migrations to update
 the database and schema:
 
-```sh
-bundle exec rake db:migrate
+```console
+$ bundle exec rake db:migrate
 ```
 
 Run the seed file as well to populate the `games` and `reviews` tables:
 
-```sh
-bundle exec rake db:seed
+```console
+$ bundle exec rake db:seed
 ```
 
 ## Setting Up the Join Class
