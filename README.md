@@ -133,7 +133,7 @@ review = Review.create(score: 8, game_id: game.id, user_id: user.id)
 ```
 
 Just like in the previous lesson, we can access data from the review instance
-about the associate game; but now, we can also access data about the associated user:
+about the associated game; but now, we can also access data about the associated user:
 
 ```rb
 review.game
@@ -293,25 +293,18 @@ relationships and following certain naming conventions. By leveraging
 "convention over configuration", we're able to quickly set up complex
 associations between multiple models with just a few lines of code.
 
-These relationships — the **one-to-many** and **many-to-many** are the most
-common when working with relational databases. You can apply the same concepts
-and code we used in this lesson to any number of different domains.
-
-For instance, we created a many-to-many relationship between users, games and
-reviews:
-
-```txt
-Game -< Review >- User
-```
-
-But the any other many-to-many relationship, like the following, could be
-achieved with very similar code:
+The **one-to-many** and **many-to-many** relationships are the most common when
+working with relational databases. You can apply the same concepts and code we
+used in this lesson to any number of different domains, for example:
 
 ```txt
 Driver -< Ride >- Passenger
 Doctor -< Appointment >- Patient
 Actor -< Character >- Movie
 ```
+
+The code required to set up these relationships would look very similar to the
+code we wrote in this lesson.
 
 By understanding the conventions Active Record expects you to follow, and how
 the underlying database relationships work, you have the ability to model all
